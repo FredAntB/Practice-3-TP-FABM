@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UPB.BusinessLogic.Models
 {
-    internal class PatientCode
+    public class PatientCode
     {
         public string Name { get; set; }
         public string LastName { get; set; }

@@ -8,7 +8,7 @@ using UPB.BusinessLogic.Models;
 
 namespace UPB.BusinessLogic.Managers
 {
-    internal class PatientCodeManager
+    public class PatientCodeManager
     {
         private List<PatientCode> _patientCodes;
 

@@ -25,6 +25,10 @@ namespace UPB.Practice_3_cert_1.Controllers
 
         [HttpPost]
         public void Post([FromBody]PatientCode patientCode) { _patientCodeManager.CreatePatientCode(patientCode); }
+        /*public void Post(string Name, string LastName, int CI)//[FromBody]PatientCode patientCode)
+        {
+            _patientCodeManager.CreatePatientCode(new PatientCode(Name, LastName, CI, ""));
+        }*/
 
         [HttpPut]
         [Route("{ci}")]

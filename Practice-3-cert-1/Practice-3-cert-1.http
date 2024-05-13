@@ -1,6 +1,6 @@
 @Practice_3_cert_1_HostAddress = http://localhost:5142
 
-GET {{Practice_3_cert_1_HostAddress}}/weatherforecast/
+GET {{Practice_3_cert_1_HostAddress}}/api/patientcode/
 Accept: application/json
 
-###
+### weatherforecast/

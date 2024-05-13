@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using UPB.BusinessLogic.Managers.Exceptions;
 using UPB.BusinessLogic.Models;
 
 namespace UPB.BusinessLogic.Managers
@@ -27,7 +28,7 @@ namespace UPB.BusinessLogic.Managers
 
             if (foundPatientCode == null)
             {
-                throw new NotImplementedException();
+                throw new PatientCodeNotFoundException("GetByCi");
             }
 
             return foundPatientCode;
@@ -35,6 +36,11 @@ namespace UPB.BusinessLogic.Managers
 
         public void CreatePatientCode(PatientCode newPatientCode)
         {
+            if(CheckIfPatientCodeExists(newPatientCode.CI))
+            {
+                throw new PatientCodeAlreadyExistsException();
+            }
+
             PatientCode createdPatientCode = new PatientCode()
             {
                 Name = newPatientCode.Name,
@@ -54,7 +60,7 @@ namespace UPB.BusinessLogic.Managers
 
             if (foundPatientCode == null)
             {
-                throw new NotImplementedException();
+                throw new PatientCodeNotFoundException("UpdatePatientCode");
             }
 
             foundPatientCode.Name = updatedPatientCode.Name;
@@ -71,7 +77,7 @@ namespace UPB.BusinessLogic.Managers
 
             if (foundPatientCode == null)
             {
-                throw new NotImplementedException();
+                throw new PatientCodeNotFoundException("DeletePatientCode");
             }
 
             _patientCodes.Remove(foundPatientCode);
@@ -84,6 +90,20 @@ namespace UPB.BusinessLogic.Managers
             code = $"{patientCode.Name[0]}{patientCode.LastName[0]}-{patientCode.CI}";
 
             return code;
+        }
+
+        private bool CheckIfPatientCodeExists(int ci)
+        {
+            PatientCode? patientCode = _patientCodes.Find(x => x.CI == ci);
+
+            if(patientCode == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
